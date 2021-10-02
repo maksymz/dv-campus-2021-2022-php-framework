@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once 'data.php';
+require_once '../src/data.php';
 $requestUri = trim($_SERVER['REQUEST_URI'], '/');
 
 switch ($requestUri) {
@@ -27,4 +27,13 @@ switch ($requestUri) {
 }
 
 
-require_once $page;
+if (!isset($page)) {
+    header("HTTP/1.0 404 Not Found");
+    exit(0);
+}
+
+header('Content-Type: text/html; charset=utf-8');
+
+ob_start();
+require_once "../src/page.php";
+echo ob_get_clean();
