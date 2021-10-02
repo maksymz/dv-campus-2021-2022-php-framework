@@ -40,32 +40,18 @@ require_once 'data.php';
 
     <main>
         <section title="Products">
-            <h1>Category 1</h1>
+            <h1><?= $data['name'] ?></h1>
             <div class="product-list">
-                <div class="product">
-                    <a href="/product-1-url" title="Product 1">
-                        <img src="/product-placeholder.png" alt="Product 1" width="200"/>
-                    </a>
-                    <a href="/product-1-url" title="Product 1">Product 1</a>
-                    <span>$33.33</span>
-                    <button type="button">Add To Cart</button>
-                </div>
-                <div class="product">
-                    <a href="/product-2-url" title="Product 2">
-                        <img src="/product-placeholder.png" alt="Product 2" width="200"/>
-                    </a>
-                    <a href="/product-2-url" title="Product 2">Product 2</a>
-                    <span>$66.66</span>
-                    <button type="button">Add To Cart</button>
-                </div>
-                <div class="product">
-                    <a href="/product-3-url" title="Product 3">
-                        <img src="/product-placeholder.png" alt="Product 3" width="200"/>
-                    </a>
-                    <a href="/product-3-url" title="Product 3">Product 3</a>
-                    <span>$99.99</span>
-                    <button type="button">Add To Cart</button>
-                </div>
+                <?php foreach (catalogGetCategoryProduct($data['category_id']) as $product) : ?>
+                    <div class="product">
+                        <a href="/<?= $product['url'] ?>" title="<?= $product['name'] ?>">
+                            <img src="/product-placeholder.png" alt="<?= $product['name'] ?>" width="200"/>
+                        </a>
+                        <a href="/<?= $product['url'] ?>" title="<?= $product['name'] ?>"><?= $product['name'] ?></a>
+                        <span>$<?= number_format($product['price'], 2) ?></span>
+                        <button type="button">Add To Cart</button>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </section>
     </main>
