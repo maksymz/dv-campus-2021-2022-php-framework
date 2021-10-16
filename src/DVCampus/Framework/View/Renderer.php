@@ -10,6 +10,8 @@ class Renderer
 
     private string $contentBlockClass;
 
+    private string $contentBlockTemplate;
+
     /**
      * @param \DI\FactoryInterface $factory
      */
@@ -26,13 +28,23 @@ class Renderer
 
     /**
      * @param string $contentBlockClass
+     * @param string $template
      * @return void
      */
-    public function setContent(string $contentBlockClass): Renderer
+    public function setContent(string $contentBlockClass, string $template = ''): Renderer
     {
         $this->contentBlockClass = $contentBlockClass;
+        $this->contentBlockTemplate = $template;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentBlockTemplate(): string
+    {
+        return $this->contentBlockTemplate;
     }
 
     /**

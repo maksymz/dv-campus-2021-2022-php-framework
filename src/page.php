@@ -33,7 +33,7 @@
 </header>
 
 <main>
-    <?= $this->render($this->getContent()) ?>
+    <?= $this->render($this->getContent(), $this->getContentBlockTemplate()) ?>
 </main>
 
 <footer>
