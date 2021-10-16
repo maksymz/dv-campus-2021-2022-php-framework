@@ -73,37 +73,3 @@ function catalogGetProduct(): array
         ]
     ];
 }
-
-function catalogGetCategoryProduct(int $categoryId): array
-{
-    $categories = catalogGetCategory();
-
-    if (!isset($categories[$categoryId])) {
-        throw new InvalidArgumentException("Category with ID $categoryId does not exist");
-    }
-
-    $productsForCategory = [];
-    $products = catalogGetProduct();
-
-    foreach ($categories[$categoryId]['products'] as $productId) {
-        if (!isset($products[$productId])) {
-            throw new InvalidArgumentException("Product with ID $productId from category $categoryId does not exist");
-        }
-
-        $productsForCategory[] = $products[$productId];
-    }
-
-    return $productsForCategory;
-}
-
-function catalogGetProductByUrl(string $url): ?array
-{
-    $data = array_filter(
-        catalogGetProduct(),
-        static function ($product) use ($url) {
-            return $product['url'] === $url;
-        }
-    );
-
-    return array_pop($data);
-}

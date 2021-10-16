@@ -4,7 +4,7 @@
 <section title="Products">
     <h1><?= $category->getName() ?></h1>
     <div class="product-list">
-        <?php foreach (catalogGetCategoryProduct($category->getCategoryId()) as $product) : ?>
+        <?php foreach ($foo->getByIds($category->getProductIds()) as $product) : ?>
             <div class="product">
                 <a href="/<?= $product['url'] ?>" title="<?= $product['name'] ?>">
                     <img src="/product-placeholder.png" alt="<?= $product['name'] ?>" width="200"/>

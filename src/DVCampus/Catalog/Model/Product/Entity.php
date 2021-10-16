@@ -1,33 +1,36 @@
 <?php
+
 declare(strict_types=1);
 
-namespace DVCampus\Catalog\Model\Category;
+namespace DVCampus\Catalog\Model\Product;
 
 class Entity
 {
-    private int $categoryId;
+    private int $productId;
 
     private string $name;
 
     private string $url;
 
-    private array $products;
+    private string $description;
+
+    private float $price;
 
     /**
      * @return int
      */
-    public function getCategoryId(): int
+    public function getProductId(): int
     {
-        return $this->categoryId;
+        return $this->productId;
     }
 
     /**
-     * @param int $categoryId
+     * @param int $productId
      * @return $this
      */
-    public function setCategoryId(int $categoryId): Entity
+    public function setProductId(int $productId): Entity
     {
-        $this->categoryId = $categoryId;
+        $this->productId = $productId;
 
         return $this;
     }
@@ -71,20 +74,39 @@ class Entity
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getProductIds(): array
+    public function getDescription(): string
     {
-        return $this->products;
+        return $this->description;
     }
 
     /**
-     * @param array $products
+     * @param string $description
      * @return $this
      */
-    public function setProductIds(array $products): Entity
+    public function setDescription(string $description): Entity
     {
-        $this->products = $products;
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float $price
+     * @return $this
+     */
+    public function setPrice(float $price): Entity
+    {
+        $this->price = $price;
 
         return $this;
     }

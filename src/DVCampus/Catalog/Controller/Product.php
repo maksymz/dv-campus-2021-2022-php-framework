@@ -19,7 +19,7 @@ class Product implements ControllerInterface
 
     public function execute(): string
     {
-        $data = $this->request->getParameter('product');
+        $product = $this->request->getParameter('product');
         $page = 'product.php';
 
         ob_start();

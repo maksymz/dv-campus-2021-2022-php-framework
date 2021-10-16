@@ -26,17 +26,17 @@ class Repository
                 ->setCategoryId(1)
                 ->setName('Apple')
                 ->setUrl('apple')
-                ->setProducts([1, 2, 3]),
+                ->setProductIds([1, 2, 3]),
             2 => $this->makeEntity()
                 ->setCategoryId(1)
                 ->setName('Samsung')
                 ->setUrl('samsung')
-                ->setProducts([3, 4, 5]),
+                ->setProductIds([3, 4, 5]),
             3 => $this->makeEntity()
                 ->setCategoryId(1)
                 ->setName('Xiaomi')
                 ->setUrl('xiaomi')
-                ->setProducts([2, 4, 6]),
+                ->setProductIds([2, 4, 6]),
         ];
     }
 
