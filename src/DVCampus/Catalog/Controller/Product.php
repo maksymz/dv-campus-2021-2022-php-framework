@@ -3,22 +3,26 @@
 namespace DVCampus\Catalog\Controller;
 
 use DVCampus\Framework\Http\ControllerInterface;
+use DVCampus\Framework\Http\Response\Raw;
 
 class Product implements ControllerInterface
 {
-    private \DVCampus\Framework\View\Renderer $renderer;
+    private \DVCampus\Framework\View\PageResponse $pageResponse;
 
     /**
-     * @param \DVCampus\Framework\View\Renderer $renderer
+     * @param \DVCampus\Framework\View\PageResponse $pageResponse
      */
     public function __construct(
-        \DVCampus\Framework\View\Renderer $renderer
+        \DVCampus\Framework\View\PageResponse $pageResponse
     ) {
-        $this->renderer = $renderer;
+        $this->pageResponse = $pageResponse;
     }
 
-    public function execute(): string
+    /**
+     * @return Raw
+     */
+    public function execute(): Raw
     {
-        return (string) $this->renderer->setContent(\DVCampus\Catalog\Block\Product::class);
+        return $this->pageResponse->setBody(\DVCampus\Catalog\Block\Product::class);
     }
 }
