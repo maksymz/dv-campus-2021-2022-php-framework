@@ -96,18 +96,6 @@ function catalogGetCategoryProduct(int $categoryId): array
     return $productsForCategory;
 }
 
-function catalogGetCategoryByUrl(string $url): ?array
-{
-    $data = array_filter(
-        catalogGetCategory(),
-        static function ($category) use ($url) {
-            return $category['url'] === $url;
-        }
-    );
-
-    return array_pop($data);
-}
-
 function catalogGetProductByUrl(string $url): ?array
 {
     $data = array_filter(

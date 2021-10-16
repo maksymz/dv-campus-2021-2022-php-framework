@@ -29,9 +29,9 @@
     </a>
     <nav>
         <ul>
-            <?php foreach (catalogGetCategory() as $category) : ?>
+            <?php foreach (catalogGetCategory() as $categoryData) : ?>
                 <li>
-                    <a href="/<?= $category['url'] ?>"><?= $category['name'] ?></a>
+                    <a href="/<?= $categoryData['url'] ?>"><?= $categoryData['name'] ?></a>
                 </li>
             <?php endforeach; ?>
         </ul>

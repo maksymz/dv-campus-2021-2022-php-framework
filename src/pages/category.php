@@ -1,7 +1,10 @@
+<?php
+/** @var \DVCampus\Catalog\Model\Category\Entity $category */
+?>
 <section title="Products">
-    <h1><?= $data['name'] ?></h1>
+    <h1><?= $category->getName() ?></h1>
     <div class="product-list">
-        <?php foreach (catalogGetCategoryProduct($data['category_id']) as $product) : ?>
+        <?php foreach (catalogGetCategoryProduct($category->getCategoryId()) as $product) : ?>
             <div class="product">
                 <a href="/<?= $product['url'] ?>" title="<?= $product['name'] ?>">
                     <img src="/product-placeholder.png" alt="<?= $product['name'] ?>" width="200"/>

@@ -11,13 +11,18 @@ class Router implements \DVCampus\Framework\Http\RouterInterface
 {
     private \DVCampus\Framework\Http\Request $request;
 
+    private Model\Category\Repository $categoryRepository;
+
     /**
      * @param \DVCampus\Framework\Http\Request $request
+     * @param Model\Category\Repository $categoryRepository
      */
     public function __construct(
-        \DVCampus\Framework\Http\Request $request
+        \DVCampus\Framework\Http\Request $request,
+        \DVCampus\Catalog\Model\Category\Repository $categoryRepository
     ) {
         $this->request = $request;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -27,8 +32,8 @@ class Router implements \DVCampus\Framework\Http\RouterInterface
     {
         require_once '../src/data.php';
 
-        if ($data = catalogGetCategoryByUrl($requestUrl)) {
-            $this->request->setParameter('category', $data);
+        if ($category = $this->categoryRepository->getByUrl($requestUrl)) {
+            $this->request->setParameter('category', $category);
             return Category::class;
         }
 
