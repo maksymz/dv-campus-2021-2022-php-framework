@@ -6,24 +6,19 @@ use DVCampus\Framework\Http\ControllerInterface;
 
 class Product implements ControllerInterface
 {
-    private \DVCampus\Framework\Http\Request $request;
+    private \DVCampus\Framework\View\Renderer $renderer;
 
     /**
-     * @param \DVCampus\Framework\Http\Request $request
+     * @param \DVCampus\Framework\View\Renderer $renderer
      */
     public function __construct(
-        \DVCampus\Framework\Http\Request $request
+        \DVCampus\Framework\View\Renderer $renderer
     ) {
-        $this->request = $request;
+        $this->renderer = $renderer;
     }
 
     public function execute(): string
     {
-        $product = $this->request->getParameter('product');
-        $page = 'product.php';
-
-        ob_start();
-        require_once "../src/page.php";
-        return ob_get_clean();
+        return (string) $this->renderer->setContent(\DVCampus\Catalog\Block\Product::class);
     }
 }

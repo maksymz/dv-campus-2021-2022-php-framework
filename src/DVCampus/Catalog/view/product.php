@@ -1,5 +1,6 @@
 <?php
-/** @var \DVCampus\Catalog\Model\Product\Entity $product */
+/** @var \DVCampus\Catalog\Block\Product $block */
+$product = $block->getProduct();
 ?>
 <div class="product-page">
     <img src="/product-placeholder.png" alt="<?= $product->getName() ?>" width="300"/>
