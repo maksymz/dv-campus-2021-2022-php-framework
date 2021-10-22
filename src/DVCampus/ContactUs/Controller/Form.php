@@ -5,15 +5,30 @@ declare(strict_types=1);
 namespace DVCampus\ContactUs\Controller;
 
 use DVCampus\Framework\Http\ControllerInterface;
+use DVCampus\Framework\Http\Response\Raw;
+use DVCampus\Framework\View\Block;
 
 class Form implements ControllerInterface
 {
-    public function execute(): string
-    {
-        $page = 'contact-us.php';
+    private \DVCampus\Framework\View\PageResponse $pageResponse;
 
-        ob_start();
-        require_once "../src/page.php";
-        return ob_get_clean();
+    /**
+     * @param \DVCampus\Framework\View\PageResponse $pageResponse
+     */
+    public function __construct(
+        \DVCampus\Framework\View\PageResponse $pageResponse
+    ) {
+        $this->pageResponse = $pageResponse;
+    }
+
+    /**
+     * @return Raw
+     */
+    public function execute(): Raw
+    {
+        return $this->pageResponse->setBody(
+            Block::class,
+            '../src/DVCampus/ContactUs/view/contact-us.php'
+        );
     }
 }

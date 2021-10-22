@@ -11,13 +11,23 @@ class Router implements \DVCampus\Framework\Http\RouterInterface
 {
     private \DVCampus\Framework\Http\Request $request;
 
+    private Model\Category\Repository $categoryRepository;
+
+    private Model\Product\Repository $productRepository;
+
     /**
      * @param \DVCampus\Framework\Http\Request $request
+     * @param Model\Category\Repository $categoryRepository
+     * @param Model\Product\Repository $productRepository
      */
     public function __construct(
-        \DVCampus\Framework\Http\Request $request
+        \DVCampus\Framework\Http\Request $request,
+        \DVCampus\Catalog\Model\Category\Repository $categoryRepository,
+        \DVCampus\Catalog\Model\Product\Repository $productRepository
     ) {
         $this->request = $request;
+        $this->categoryRepository = $categoryRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -25,15 +35,13 @@ class Router implements \DVCampus\Framework\Http\RouterInterface
      */
     public function match(string $requestUrl): string
     {
-        require_once '../src/data.php';
-
-        if ($data = catalogGetCategoryByUrl($requestUrl)) {
-            $this->request->setParameter('category', $data);
+        if ($category = $this->categoryRepository->getByUrl($requestUrl)) {
+            $this->request->setParameter('category', $category);
             return Category::class;
         }
 
-        if ($data = catalogGetProductByUrl($requestUrl)) {
-            $this->request->setParameter('product', $data);
+        if ($product = $this->productRepository->getByUrl($requestUrl)) {
+            $this->request->setParameter('product', $product);
             return Product::class;
         }
 

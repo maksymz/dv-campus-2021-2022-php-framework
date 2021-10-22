@@ -1,5 +1,5 @@
 <?php
-    require_once '../src/data.php';
+/** @var \DVCampus\Framework\View\Renderer $this */
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,18 +28,12 @@
         <img src="logo.jpg" alt="{DV.Campus} Logo" width="200"/>
     </a>
     <nav>
-        <ul>
-            <?php foreach (catalogGetCategory() as $category) : ?>
-                <li>
-                    <a href="/<?= $category['url'] ?>"><?= $category['name'] ?></a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <?= $this->render(\DVCampus\Catalog\Block\CategoryList::class) ?>
     </nav>
 </header>
 
 <main>
-    <?php require_once "../src/pages/$page" ?>
+    <?= $this->render($this->getContent(), $this->getContentBlockTemplate()) ?>
 </main>
 
 <footer>

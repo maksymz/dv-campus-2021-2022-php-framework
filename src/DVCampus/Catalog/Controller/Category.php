@@ -1,29 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DVCampus\Catalog\Controller;
 
 use DVCampus\Framework\Http\ControllerInterface;
+use DVCampus\Framework\Http\Response\Raw;
 
 class Category implements ControllerInterface
 {
-    private \DVCampus\Framework\Http\Request $request;
+    private \DVCampus\Framework\View\PageResponse $pageResponse;
 
     /**
-     * @param \DVCampus\Framework\Http\Request $request
+     * @param \DVCampus\Framework\View\PageResponse $pageResponse
      */
     public function __construct(
-        \DVCampus\Framework\Http\Request $request
+        \DVCampus\Framework\View\PageResponse $pageResponse
     ) {
-        $this->request = $request;
+        $this->pageResponse = $pageResponse;
     }
 
-    public function execute(): string
+    /**
+     * @return Raw
+     */
+    public function execute(): Raw
     {
-        $data = $this->request->getParameter('category');
-        $page = 'category.php';
-
-        ob_start();
-        require_once "../src/page.php";
-        return ob_get_clean();
+        return $this->pageResponse->setBody(\DVCampus\Catalog\Block\Category::class);
     }
 }
