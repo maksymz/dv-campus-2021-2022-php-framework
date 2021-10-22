@@ -29,13 +29,28 @@ class Index implements \DVCampus\Framework\Http\ControllerInterface
      */
     public function execute(): Html
     {
+        $output = '';
+
         try {
-            $sql = file_get_contents('../config/schema.sql');
             $connection = $this->adapter->getConnection();
             $this->html->setBody('Successful DB connection!');
+            // Convention: comment `#---` is a query separator for `schema.sql` file
+            $sql = file_get_contents('../config/schema.sql');
+
+            foreach (explode('#---', $sql) as $query) {
+                $query = trim($query);
+                $output .= sprintf('Executing query: <br/><pre>%s</pre><br/>', htmlspecialchars($query));
+                if (!$connection->query($query)) {
+                    throw new \RuntimeException('Error executing query!');
+                }
+            }
+
+            $output .= '<p style="font-size:32px;color:green;">Execution completed!</p>';
         } catch (\Exception $e) {
-            $this->html->setBody($e->getMessage());
+            $output .= "<p style='font-size:32px;color:red;'>{$e->getMessage()}</p>";
         }
+
+        $this->html->setBody($output);
 
         return $this->html;
     }
