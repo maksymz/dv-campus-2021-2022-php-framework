@@ -14,7 +14,7 @@ class Index implements \DVCampus\Framework\Http\ControllerInterface
 
     /**
      * @param \DVCampus\Framework\Database\Adapter\AdapterInterface $adapter
-     * @param \DVCampus\Framework\Http\$page\Html $html
+     * @param \DVCampus\Framework\Http\Response\Html $html
      */
     public function __construct(
         \DVCampus\Framework\Database\Adapter\AdapterInterface $adapter,
@@ -29,9 +29,13 @@ class Index implements \DVCampus\Framework\Http\ControllerInterface
      */
     public function execute(): Html
     {
-        $connection = $this->adapter->getConnection();
-
-        $this->html->setBody('Testing controller');
+        try {
+            $sql = file_get_contents('../config/schema.sql');
+            $connection = $this->adapter->getConnection();
+            $this->html->setBody('Successful DB connection!');
+        } catch (\Exception $e) {
+            $this->html->setBody($e->getMessage());
+        }
 
         return $this->html;
     }
