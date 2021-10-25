@@ -11,8 +11,8 @@ return [
     MySQL::class => DI\autowire()->constructorParameter(
         'connectionParams',
         [
-            MySQL::DB_NAME     => 'dv_campus_blog',
-            MySQL::DB_USER     => 'dv_campus_blog_user',
+            MySQL::DB_NAME     => 'dv_campus_shop',
+            MySQL::DB_USER     => 'dv_campus_shop_user',
             MySQL::DB_PASSWORD => '45Ya!$""sT&P*C%RNSEhr',
             MySQL::DB_HOST     => 'mysql',
             MySQL::DB_PORT     => '3306'
