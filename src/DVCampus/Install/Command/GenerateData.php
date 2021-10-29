@@ -53,7 +53,6 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
         return self::SUCCESS;
     }
 
-
     /**
      * Generate test data
      *
@@ -61,7 +60,8 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
      */
     private function generateData(): void
     {
-        $this->truncateTables();
+        $this->profile([$this, 'truncateTables']);
+        $this->profile([$this, 'generateCategories']);
     }
 
     /**
@@ -79,10 +79,46 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
             ProductRepository::TABLE,
         ];
         $connection = $this->adapter->getConnection();
+        $connection->query('SET FOREIGN_KEY_CHECKS=0');
 
         foreach ($tables as $table) {
-            $connection->query("TRUNCATE TABLE $table");
+            $connection->query("TRUNCATE TABLE `$table`");
             $this->output->writeln("Truncated table: $table");
         }
+
+        $connection->query('SET FOREIGN_KEY_CHECKS=1');
+    }
+
+    /**
+     * Insert seven categories. Add data to random 5 of them
+     */
+    private function generateCategories(): void
+    {
+        $categories = [
+            'Apple', 'Samsung', 'Xiaomi', 'Google', 'LG', 'OnePlus', 'Oppo'
+        ];
+        $statement = $this->adapter->getConnection()
+            ->prepare(<<<SQL
+                INSERT INTO category (`name`, `url`)
+                VALUES (:name, :url);
+            SQL);
+
+        foreach ($categories as $category) {
+            $statement->bindValue(':name', $category);
+            $statement->bindValue(':url', strtolower($category));
+            $statement->execute();
+        }
+    }
+
+    /**
+     * @param callable $callback
+     * @return void
+     */
+    private function profile(callable $callback): void
+    {
+        $start = microtime(true);
+        $callback();
+        $totalTime = number_format(microtime(true) - $start, 4);
+        $this->output->writeln("Executing <info>$callback[1]</info> took <info>$totalTime</info>");
     }
 }
