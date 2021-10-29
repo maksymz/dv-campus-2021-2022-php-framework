@@ -17,6 +17,12 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
 
     private OutputInterface $output;
 
+    private const PRODUCTS_COUNT = 250;
+
+    private const ORDERS_COUNT = 1000;
+
+    private const MAX_ITEMS_PER_ORDER = 10;
+
     /**
      * @param \DVCampus\Framework\Database\Adapter\AdapterInterface $adapter
      * @param string|null $name
@@ -62,6 +68,10 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
     {
         $this->profile([$this, 'truncateTables']);
         $this->profile([$this, 'generateCategories']);
+        $this->profile([$this, 'generateProducts']);
+        $this->profile([$this, 'generateProductCategories']);
+        $this->profile([$this, 'generateOrders']);
+        $this->profile([$this, 'generateOrderItems']);
     }
 
     /**
@@ -91,6 +101,8 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
 
     /**
      * Insert seven categories. Add data to random 5 of them
+     *
+     * @return void
      */
     private function generateCategories(): void
     {
@@ -109,6 +121,70 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
             $statement->execute();
         }
     }
+
+    /**
+     * @return void
+     */
+    private function generateProducts(): void
+    {
+        $statement = $this->adapter->getConnection()
+            ->prepare(<<<SQL
+                INSERT INTO product (`sku`, `name`, `url`, `description`, `qty`, `price`)
+                VALUES (:sku, :name, :url, :description, :qty, :price);
+            SQL);
+
+        for ($i = 1; $i <= self::PRODUCTS_COUNT; $i++) {
+            $name = "Product $i";
+            $url = str_replace(' ', '_', strtolower($name));
+            $statement->bindValue(':sku', uniqid('', true));
+            $statement->bindValue(':name', $name);
+            $statement->bindValue(':url', $url);
+            $statement->bindValue(':description', "$name short description text");
+            $statement->bindValue(':qty', random_int(0, 10), \PDO::PARAM_INT);
+            $statement->bindValue(':price', random_int(10, 100000) / 100, \PDO::PARAM_STR);
+            $statement->execute();
+        }
+    }
+
+    /**
+     * @return void
+     */
+    private function generateProductCategories(): void
+    {
+        $statement = $this->adapter->getConnection()
+            ->prepare(<<<SQL
+                INSERT INTO category_product (`category_id`, `product_id`)
+                VALUES (:category_id, :product_id);
+            SQL);
+        // Get only 5 random categories of total 7
+        $categoryIds = array_rand(array_flip(range(1, 7)), 5);
+
+        for ($i = 1; $i <= self::PRODUCTS_COUNT; $i++) {
+            if (random_int(1, 3) === 1) {
+                continue;
+            }
+
+            $productCategories = (array) array_rand(array_flip($categoryIds), random_int(1, 5));
+
+            foreach ($productCategories as $categoryId) {
+                $statement->bindValue(':category_id', $categoryId);
+                $statement->bindValue(':product_id', $i);
+                $statement->execute();
+            }
+        }
+    }
+
+    /**
+     * @return void
+     */
+    private function generateOrders(): void
+    {}
+
+    /**
+     * @return void
+     */
+    private function generateOrderItems(): void
+    {}
 
     /**
      * @param callable $callback
