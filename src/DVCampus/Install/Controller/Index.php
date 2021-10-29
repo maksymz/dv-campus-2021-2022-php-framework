@@ -33,7 +33,7 @@ class Index implements \DVCampus\Framework\Http\ControllerInterface
 
         try {
             $connection = $this->adapter->getConnection();
-            $this->html->setBody('Successful DB connection!');
+            $output .= 'Successful DB connection!<br/><br/>';
             // Convention: comment `#---` is a query separator for `schema.sql` file
             $sql = file_get_contents('../config/schema.sql');
 
