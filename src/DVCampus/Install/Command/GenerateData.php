@@ -181,11 +181,12 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
     {
         $statement = $this->adapter->getConnection()
             ->prepare(<<<SQL
-                INSERT INTO `order` (`firstname`, `lastname`, `total`, `created_at`)
-                VALUES (:firstname, :lastname, :total, :created_at);
+                INSERT INTO `order` (`customer_id`, `firstname`, `lastname`, `total`, `created_at`)
+                VALUES (:customer_id, :firstname, :lastname, :total, :created_at);
             SQL);
 
         for ($i = 1; $i <= self::ORDERS_COUNT; $i++) {
+            $statement->bindValue(':customer_id', random_int(1, self::PRODUCTS_COUNT / 2));
             $statement->bindValue(':firstname', $this->getRandomName());
             $statement->bindValue(':lastname', $this->getRandomName());
             $statement->bindValue(':total', random_int(1000, 1000000) / 100);

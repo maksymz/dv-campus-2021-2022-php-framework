@@ -28,6 +28,7 @@ CREATE TABLE `category` (
 #---
 CREATE TABLE `order` (
     `order_id` int unsigned NOT NULL AUTO_INCREMENT COMMENT 'Order ID',
+    `customer_id` int unsigned NOT NULL COMMENT 'Customer ID',
     `firstname` varchar(127) DEFAULT NULL COMMENT 'First Name',
     `lastname` varchar(127) DEFAULT NULL COMMENT 'Last Name',
     `total` decimal(10,2) NOT NULL COMMENT 'Total',
@@ -64,11 +65,11 @@ VALUES ('Apple', 'Apple'),
        ('Google', 'google'),
        ('LG', 'lg');
 #---
-INSERT INTO `order` (`firstname`, `lastname`, `total`, `shipping_method`, `shipping_info`)
-VALUES ('Юрій', 'Коваленко', 650.00, NULL, NULL),
-       ('Юрій', 'Коваленко', 199.99, 'Нова пошта', 'м. Черкаси, відділення №14 (бульвар Шевченка, 385), Юрій Коваленко'),
-       ('Галина', 'Нікітіч', 300.00, NULL, NULL),
-       ('Соломія', 'Федорів', 199.99, 'Нова пошта', 'м. Київ, відділення №46 (бульвар Дружби Народів, 14), Захар Петрів');
+INSERT INTO `order` (`customer_id`, `firstname`, `lastname`, `total`, `shipping_method`, `shipping_info`)
+VALUES (1, 'Юрій', 'Коваленко', 650.00, NULL, NULL),
+       (1, 'Юрій', 'Коваленко', 199.99, 'Нова пошта', 'м. Черкаси, відділення №14 (бульвар Шевченка, 385), Юрій Коваленко'),
+       (2, 'Галина', 'Нікітіч', 300.00, NULL, NULL),
+       (3, 'Соломія', 'Федорів', 199.99, 'Нова пошта', 'м. Київ, відділення №46 (бульвар Дружби Народів, 14), Захар Петрів');
 
 #---
 INSERT INTO `order_item` (`order_id`, `product_id`, `sku`, `name`, `qty`, `item_price`, `total`)
