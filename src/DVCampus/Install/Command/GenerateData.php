@@ -19,7 +19,7 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
 
     private const PRODUCTS_COUNT = 250;
 
-    private const ORDERS_COUNT = 1000;
+    private const ORDERS_COUNT = 100;
 
     private const MAX_ITEMS_PER_ORDER = 10;
 
@@ -141,7 +141,7 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
             $statement->bindValue(':url', $url);
             $statement->bindValue(':description', "$name short description text");
             $statement->bindValue(':qty', random_int(0, 10), \PDO::PARAM_INT);
-            $statement->bindValue(':price', random_int(10, 100000) / 100, \PDO::PARAM_STR);
+            $statement->bindValue(':price', random_int(10, 100000) / 100);
             $statement->execute();
         }
     }
@@ -178,13 +178,69 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
      * @return void
      */
     private function generateOrders(): void
-    {}
+    {
+        $statement = $this->adapter->getConnection()
+            ->prepare(<<<SQL
+                INSERT INTO `order` (`firstname`, `lastname`, `total`, `created_at`)
+                VALUES (:firstname, :lastname, :total, :created_at);
+            SQL);
+
+        for ($i = 1; $i <= self::ORDERS_COUNT; $i++) {
+            $statement->bindValue(':firstname', $this->getRandomName());
+            $statement->bindValue(':lastname', $this->getRandomName());
+            $statement->bindValue(':total', random_int(1000, 1000000) / 100);
+            // random date from 2021-10-01 to 2021-11-01
+            $statement->bindValue(':created_at', date('Y-m-d', random_int(1633046400, 1635724800)));
+            $statement->execute();
+        }
+    }
 
     /**
      * @return void
      */
     private function generateOrderItems(): void
-    {}
+    {
+        $statement = $this->adapter->getConnection()
+            ->prepare(<<<SQL
+                INSERT INTO order_item (`order_id`, `product_id`, `sku`, `name`, `qty`, `item_price`, `total`)
+                VALUES (:order_id, :product_id, :sku, :name, :qty, :item_price, :total);
+            SQL);
+
+        for ($orderId = 1; $orderId <= self::ORDERS_COUNT; $orderId++) {
+            $totalOrderItems = random_int(1, self::MAX_ITEMS_PER_ORDER);
+
+            for ($i = 0; $i < $totalOrderItems; $i++) {
+                $qty = random_int(1, 10);
+                $itemPrice = random_int(10, 100000) / 100;
+                // Suppose the same item can be added twice with different additional options
+                $productId = random_int(1, self::PRODUCTS_COUNT);
+                $statement->bindValue(':order_id', $orderId);
+                $statement->bindValue(':product_id', $productId);
+                $statement->bindValue(':sku', uniqid('', true));
+                $statement->bindValue(':name', "Product $productId");
+                $statement->bindValue(':qty', $qty, \PDO::PARAM_INT);
+                $statement->bindValue(':item_price', $itemPrice);
+                $statement->bindValue(':total', $qty * $itemPrice);
+                $statement->execute();
+            }
+        }
+    }
+
+    /**
+     * @return void
+     */
+    private function getRandomName(): string
+    {
+        static $randomNames = [
+            'Norbert','Damon','Laverna','Annice','Brandie','Emogene','Cinthia','Magaret','Daria','Ellyn','Rhoda',
+            'Debbra','Reid','Desire','Sueann','Shemeka','Julian','Winona','Billie','Michaela','Loren','Zoraida',
+            'Jacalyn','Lovella','Bernice','Kassie','Natalya','Whitley','Katelin','Danica','Willow','Noah','Tamera',
+            'Veronique','Cathrine','Jolynn','Meridith','Moira','Vince','Fransisca','Irvin','Catina','Jackelyn',
+            'Laurine','Freida','Torri','Terese','Dorothea','Landon','Emelia'
+        ];
+
+        return $randomNames[array_rand($randomNames)];
+    }
 
     /**
      * @param callable $callback
