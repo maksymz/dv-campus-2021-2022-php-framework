@@ -6,6 +6,10 @@ namespace DVCampus\Catalog\Model\Product;
 
 class Repository
 {
+    public const TABLE = 'product';
+
+    public const TABLE_CATEGORY_PRODUCT = 'category_product';
+
     private \DI\FactoryInterface $factory;
 
     /**
