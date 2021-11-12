@@ -7,6 +7,10 @@
     <meta charset="UTF-8">
     <title>{DV.Campus} PHP Framework</title>
     <style>
+        html {
+            max-width: 100%;
+        }
+
         header,
         main,
         footer {
@@ -15,6 +19,7 @@
 
         .product-list {
             display: flex;
+            flex-wrap: wrap;
         }
 
         .product-list .product {

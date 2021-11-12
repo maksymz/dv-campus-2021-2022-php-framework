@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DVCampus\Catalog\Model\Category;
@@ -10,8 +11,6 @@ class Entity
     private string $name;
 
     private string $url;
-
-    private array $products;
 
     /**
      * @return int
@@ -66,25 +65,6 @@ class Entity
     public function setUrl(string $url): Entity
     {
         $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getProductIds(): array
-    {
-        return $this->products;
-    }
-
-    /**
-     * @param array $products
-     * @return $this
-     */
-    public function setProductIds(array $products): Entity
-    {
-        $this->products = $products;
 
         return $this;
     }

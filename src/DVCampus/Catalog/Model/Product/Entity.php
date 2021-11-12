@@ -8,6 +8,8 @@ class Entity
 {
     private int $productId;
 
+    private string $sku;
+
     private string $name;
 
     private string $url;
@@ -15,6 +17,12 @@ class Entity
     private string $description;
 
     private float $price;
+
+    private float $qty;
+
+    private $createdAt;
+
+    private $updatedAt;
 
     /**
      * @return int
@@ -31,6 +39,25 @@ class Entity
     public function setProductId(int $productId): Entity
     {
         $this->productId = $productId;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSku(): string
+    {
+        return $this->sku;
+    }
+
+    /**
+     * @param string $sku
+     * @return $this
+     */
+    public function setSku(string $sku): Entity
+    {
+        $this->sku = $sku;
 
         return $this;
     }
@@ -107,6 +134,63 @@ class Entity
     public function setPrice(float $price): Entity
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQty(): float
+    {
+        return $this->qty;
+    }
+
+    /**
+     * @param int $qty
+     * @return $this
+     */
+    public function setQty(int $qty): Entity
+    {
+        $this->qty = $qty;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreatedAt(): int
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param int $createdAt
+     * @return $this
+     */
+    public function setCreatedAt(int $createdAt): Entity
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUpdatedAt(): int
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param int $updatedAt
+     * @return $this
+     */
+    public function setUpdatedAt(int $updatedAt): Entity
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
