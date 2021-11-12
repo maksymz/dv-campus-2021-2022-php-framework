@@ -17,9 +17,9 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
 
     private OutputInterface $output;
 
-    private const PRODUCTS_COUNT = 250;
+    private const PRODUCTS_COUNT = 250000;
 
-    private const ORDERS_COUNT = 100;
+    private const ORDERS_COUNT = 100000;
 
     private const MAX_ITEMS_PER_ORDER = 10;
 
@@ -63,15 +63,30 @@ class GenerateData extends \Symfony\Component\Console\Command\Command
      * Generate test data
      *
      * @return void
+     * @throws \Exception
      */
     private function generateData(): void
     {
-        $this->profile([$this, 'truncateTables']);
-        $this->profile([$this, 'generateCategories']);
-        $this->profile([$this, 'generateProducts']);
-        $this->profile([$this, 'generateProductCategories']);
-        $this->profile([$this, 'generateOrders']);
-        $this->profile([$this, 'generateOrderItems']);
+        $callbacks = [
+            [$this, 'truncateTables'],
+            [$this, 'generateCategories'],
+            [$this, 'generateProducts'],
+            [$this, 'generateProductCategories'],
+            [$this, 'generateOrders'],
+            [$this, 'generateOrderItems']
+        ];
+        $connection = $this->adapter->getConnection();
+
+        foreach ($callbacks as $callback) {
+            try {
+                $connection->beginTransaction();
+                $this->profile($callback);
+                $connection->commit();
+            } catch (\Exception $e) {
+                $connection->rollBack();
+                throw $e;
+            }
+        }
     }
 
     /**
