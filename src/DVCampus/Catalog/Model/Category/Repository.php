@@ -4,65 +4,23 @@ declare(strict_types=1);
 
 namespace DVCampus\Catalog\Model\Category;
 
-class Repository
+class Repository extends \DVCampus\Framework\Database\AbstractRepository
 {
     public const TABLE = 'category';
 
-    private \DI\FactoryInterface $factory;
-
-    /**
-     * @param \DI\FactoryInterface $factory
-     */
-    public function __construct(\DI\FactoryInterface $factory)
-    {
-        $this->factory = $factory;
-    }
-
-    /**
-     * @return Entity[]
-     */
-    public function getList(): array
-    {
-        return [
-            1 => $this->makeEntity()
-                ->setCategoryId(1)
-                ->setName('Apple')
-                ->setUrl('apple')
-                ->setProductIds([1, 2, 3]),
-            2 => $this->makeEntity()
-                ->setCategoryId(1)
-                ->setName('Samsung')
-                ->setUrl('samsung')
-                ->setProductIds([3, 4, 5]),
-            3 => $this->makeEntity()
-                ->setCategoryId(1)
-                ->setName('Xiaomi')
-                ->setUrl('xiaomi')
-                ->setProductIds([2, 4, 6]),
-        ];
-    }
+    public const ENTITY = Entity::class;
 
     /**
      * @param string $url
-     * @return ?Entity
+     * @return Entity|object|null
      */
-    public function getByUrl(string $url): ?Entity
+    public function getByUrl(string $url)
     {
-        $data = array_filter(
-            $this->getList(),
-            static function ($category) use ($url) {
-                return $category->getUrl() === $url;
-            }
+        return $this->fetchOne(
+            $this->select()->where('url = :url'),
+            [
+                ':url' => $url
+            ]
         );
-
-        return array_pop($data);
-    }
-
-    /**
-     * @return Entity
-     */
-    private function makeEntity(): Entity
-    {
-        return $this->factory->make(Entity::class);
     }
 }

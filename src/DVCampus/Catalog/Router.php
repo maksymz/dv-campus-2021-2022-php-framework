@@ -35,6 +35,10 @@ class Router implements \DVCampus\Framework\Http\RouterInterface
      */
     public function match(string $requestUrl): string
     {
+        if (!$requestUrl) {
+            return '';
+        }
+
         if ($category = $this->categoryRepository->getByUrl($requestUrl)) {
             $this->request->setParameter('category', $category);
             return Category::class;

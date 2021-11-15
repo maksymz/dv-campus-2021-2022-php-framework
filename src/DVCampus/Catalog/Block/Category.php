@@ -39,8 +39,8 @@ class Category extends \DVCampus\Framework\View\Block
      */
     public function getCategoryProducts(): array
     {
-        return $this->productRepository->getByIds(
-            $this->getCategory()->getProductIds()
+        return $this->productRepository->getByCategoryId(
+            $this->getCategory()->getCategoryId()
         );
     }
 }
