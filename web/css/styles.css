@@ -1,9 +1,62 @@
 body {
     background: #eee;
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 16px;
 }
 
 a {
     text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    width: 100%;
+}
+
+
+header {
+    background: #fff;
+}
+
+.content-wrapper {
+    width: 100%;
+    padding: 0 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.navigation .header-links-wrapper .header-link {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #555;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+
+.navigation .header-links-wrapper .header-link:hover {
+    border-color: #555;
+    background: transparent;
+}
+
+.navigation .header-links-wrapper .header-link:hover a {
+    color: #555;
+}
+
+.navigation .header-links-wrapper .header-link a {
+    color: #fff;
 }
 
 header .logo {
@@ -13,9 +66,13 @@ header .logo {
     color: #888;
 }
 
-.header-links-wrapper >li > a {
-    background: #555;
-    color: #fff;
+/*.header-links-wrapper >li > a {*/
+/*    background: #555;*/
+/*    color: #fff;*/
+/*}*/
+
+.sublinks-container {
+    display: none;
 }
 
 .sublinks-container > li a {
@@ -23,10 +80,27 @@ header .logo {
     color: yellow;
 }
 
+.header-links-wrapper > .header-link:nth-child(2):hover .sublinks-container {
+    display: block;
+}
+
+.page-title {
+    font-size: 24px;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 18px;
+    color: gray;
+}
+
 #main .section-blue .section-title ~ p {
     color: blue;
 }
 
+.section-blue .image-wrapper {
+    display: none;
+}
 .section-blue .social-links .links-wrepper .slocial-link:first-child {
     background: #777777;
 }
@@ -37,4 +111,48 @@ header .logo {
 
 .section-blue .social-links .links-wrepper .slocial-link:last-child:hover {
     margin-left: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+    body {
+        background-color: lightblue;
+    }
+
+    .page-title {
+        font-size: 30px;
+        color: blue;
+    }
+
+    .section-title {
+        font-size: 24px;
+        color: blue;
+    }
+
+    .section-blue .image-wrapper {
+        display: block;
+        float: left;
+        width: 30%;
+        max-width: 300px;
+    }
+
+    .section-blue .social-links {
+        clear: both;
+    }
+
+}
+
+@media only screen and (min-width: 1024px) {
+    body {
+        background-color: lightblue;
+    }
+
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .section-blue .image-wrapper {
+        float: right;
+    }
 }
