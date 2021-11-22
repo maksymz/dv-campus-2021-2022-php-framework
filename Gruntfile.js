@@ -29,10 +29,39 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+        postcss: {
+            dev: {
+                options: {
+                    map: true,
+                    processors: [
+                        require('autoprefixer')({
+                            overrideBrowserslist: ['last 2 versions']
+                        })
+                    ]
+                },
+                src: 'web/css/main.css',
+                dest: 'web/css/main.min.css'
+            },
+
+            prod: {
+                options: {
+                    processors: [
+                        require('autoprefixer')({
+                            overrideBrowserslist: ['last 2 versions']
+                        }),
+                        require('cssnano')()
+                    ]
+                },
+                src: 'web/css/main.css',
+                dest: 'web/css/main.min.css'
+            }
+        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('@lodder/grunt-postcss');
 
-    grunt.registerTask('default', ['less:prod']);
-    grunt.registerTask('dev', ['less:dev']);
+    grunt.registerTask('default', ['less:prod', 'postcss:prod']);
+    grunt.registerTask('dev', ['less:dev', 'postcss:dev']);
 };

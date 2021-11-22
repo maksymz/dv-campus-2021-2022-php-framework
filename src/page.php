@@ -9,8 +9,8 @@
     <title>{DV.Campus} PHP Framework</title>
     <link rel="preload" as="style" href="/css/reset.css"/>
     <link rel="stylesheet" href="/css/reset.css"/>
-    <link rel="preload" as="style" href="/css/main.css"/>
-    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="preload" as="style" href="/css/main.min.css"/>
+    <link rel="stylesheet" href="/css/main.min.css"/>
 </head>
 <body>
 <header>
