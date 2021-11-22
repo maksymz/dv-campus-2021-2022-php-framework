@@ -68,12 +68,24 @@ module.exports = function(grunt) {
                 }]
             }
         },
+
+        watch: {
+            less: {
+                files: ['frontend/css/source/**/*.less'],
+                tasks: ['less:dev', 'postcss:dev']
+            },
+            image: {
+                files: 'frontend/images/**/*.{png,jpg,gif}',
+                tasks: ['image']
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('@lodder/grunt-postcss');
     grunt.loadNpmTasks('grunt-image');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('default', ['less:prod', 'postcss:prod', 'image']);
-    grunt.registerTask('dev', ['less:dev', 'postcss:dev', 'image']);
+    grunt.registerTask('dev', ['less:dev', 'postcss:dev', 'image', 'watch']);
 };
