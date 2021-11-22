@@ -5,32 +5,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>{DV.Campus} PHP Framework</title>
-    <style>
-        html {
-            max-width: 100%;
-        }
-
-        header,
-        main,
-        footer {
-            border: 1px dashed black;
-        }
-
-        .product-list {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .product-list .product {
-            max-width: 30%;
-        }
-    </style>
+    <link rel="preload" as="style" href="/css/reset.css"/>
+    <link rel="stylesheet" href="/css/reset.css"/>
+    <link rel="preload" as="style" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/main.css"/>
 </head>
 <body>
 <header>
     <a href="/" title="{DV.Campus} PHP Framework">
-        <img src="logo.jpg" alt="{DV.Campus} Logo" width="200"/>
+        <img src="/logo.jpg" alt="{DV.Campus} Logo" width="200"/>
     </a>
     <nav>
         <?= $this->render(\DVCampus\Catalog\Block\CategoryList::class) ?>

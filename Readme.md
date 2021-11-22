@@ -18,6 +18,8 @@ To start project with [Default Value Docker infrastructure](https://github.com/D
 7. Create MySQL user, DB and grant permissions
 8. Setup DB schema and data
 9. Optional: generate test data
+10. Install Grunt CLI
+11. Compile styles
 
 ```bash
 # 1. Clone the project
@@ -53,4 +55,10 @@ curl http://dv-campus-2021-2022-php-framework.local/install
 
 # 9. Optional: generate test data
 docker exec -it dv-campus-2021-2022-php-framework.local php bin/console install:generate-data
+
+# 10. Install Grunt CLI
+docker exec -it dv-campus-2021-2022-php-framework.local  npm install grunt --save-dev
+
+# 11. Compile styles
+docker exec -it dv-campus-2021-2022-php-framework.local grunt
 ```
