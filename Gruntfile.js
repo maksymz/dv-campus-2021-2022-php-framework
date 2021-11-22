@@ -57,11 +57,23 @@ module.exports = function(grunt) {
                 dest: 'web/css/main.min.css'
             }
         },
+
+        image: {
+            dynamic: {
+                files: [{
+                    expand: true,
+                    cwd: 'frontend/images/',
+                    src: ['**/*.{png,jpg,gif}'],
+                    dest: 'web/images/'
+                }]
+            }
+        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('@lodder/grunt-postcss');
+    grunt.loadNpmTasks('grunt-image');
 
-    grunt.registerTask('default', ['less:prod', 'postcss:prod']);
-    grunt.registerTask('dev', ['less:dev', 'postcss:dev']);
+    grunt.registerTask('default', ['less:prod', 'postcss:prod', 'image']);
+    grunt.registerTask('dev', ['less:dev', 'postcss:dev', 'image']);
 };

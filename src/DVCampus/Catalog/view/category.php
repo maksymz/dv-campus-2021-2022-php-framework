@@ -7,7 +7,7 @@
         <?php foreach ($block->getCategoryProducts() as $product) : ?>
             <div class="product">
                 <a href="/<?= $product->getUrl() ?>" title="<?= $product->getName() ?>">
-                    <img src="/product-placeholder.png" alt="<?= $product->getName() ?>" width="200"/>
+                    <img src="/images/product-placeholder.png" alt="<?= $product->getName() ?>" width="200"/>
                 </a>
                 <a href="/<?= $product->getUrl() ?>" title="<?= $product->getName() ?>"><?= $product->getName() ?></a>
                 <span>$<?= number_format($product->getPrice(), 2) ?></span>

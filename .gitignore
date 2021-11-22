@@ -2,6 +2,7 @@
 
 /node_modules/*
 /web/css/main.*
+/web/images/*
 /var/log/*
 !/var/log/.gitkeep
 /vendor/

@@ -15,7 +15,7 @@
 <body>
 <header>
     <a href="/" title="{DV.Campus} PHP Framework">
-        <img src="/logo.jpg" alt="{DV.Campus} Logo" width="200"/>
+        <img src="/images/logo.jpg" alt="{DV.Campus} Logo" width="200"/>
     </a>
     <nav>
         <?= $this->render(\DVCampus\Catalog\Block\CategoryList::class) ?>
