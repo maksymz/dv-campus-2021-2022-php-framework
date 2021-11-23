@@ -14,12 +14,19 @@
 </head>
 <body>
 <header>
-    <a href="/" title="{DV.Campus} PHP Framework">
-        <img src="/images/logo.jpg" alt="{DV.Campus} Logo" width="200"/>
-    </a>
-    <nav>
-        <?= $this->render(\DVCampus\Catalog\Block\CategoryList::class) ?>
-    </nav>
+    <div class="header-wrapper content-wrapper">
+        <a href="/" title="{DV.Campus} PHP Framework">
+            <img src="/images/logo.jpg" alt="{DV.Campus} Logo" width="200"/>
+        </a>
+        <nav>
+            <div class="menu-btn-mobile">
+                <button class="wrapper-button">
+                    <i></i><i></i><i></i>
+                </button>
+            </div>
+            <?= $this->render(\DVCampus\Catalog\Block\CategoryList::class) ?>
+        </nav>
+    </div>
 </header>
 
 <main>

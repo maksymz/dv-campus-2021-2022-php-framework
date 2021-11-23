@@ -8,7 +8,7 @@
             </a>
             <a href="/product-1-url" title="Product 1">Product 1</a>
             <span>$33.33</span>
-            <button type="button">Add To Cart</button>
+            <button type="button" class="button-hover">Add To Cart</button>
         </div>
         <div class="product">
             <a href="/product-2-url" title="Product 2">
@@ -16,7 +16,7 @@
             </a>
             <a href="/product-2-url" title="Product 2">Product 2</a>
             <span>$66.66</span>
-            <button type="button">Add To Cart</button>
+            <button type="button" class="button-hover">Add To Cart</button>
         </div>
         <div class="product">
             <a href="/product-3-url" title="Product 3">
@@ -24,7 +24,7 @@
             </a>
             <a href="/product-3-url" title="Product 3">Product 3</a>
             <span>$99.99</span>
-            <button type="button">Add To Cart</button>
+            <button type="button" class="button-hover">Add To Cart</button>
         </div>
     </div>
 </section>
