@@ -29,7 +29,7 @@
     </div>
 </header>
 
-<main>
+<main class="content-wrapper">
     <?= $this->render($this->getContent(), $this->getContentBlockTemplate()) ?>
 </main>
 

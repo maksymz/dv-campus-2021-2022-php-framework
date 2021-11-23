@@ -6,13 +6,13 @@
     <div class="product-list">
         <?php foreach ($block->getCategoryProducts() as $product) : ?>
             <div class="product">
-                <a href="/<?= $product->getUrl() ?>" title="<?= $product->getName() ?>">
-                    <img src="/images/product-placeholder.png" alt="<?= $product->getName() ?>" width="200"/>
+                <a href="/<?= $product->getUrl() ?>" title="<?= $product->getName() ?>" class="product-item-image">
+                    <img src="/images/product-placeholder.png" alt="<?= $product->getName() ?>" />
                 </a>
-                <a href="/<?= $product->getUrl() ?>" title="<?= $product->getName() ?>"><?= $product->getName() ?></a>
-                <span>$<?= number_format($product->getPrice(), 2) ?></span>
-                <button type="button">Add To Cart</button>
+                <a href="/<?= $product->getUrl() ?>" title="<?= $product->getName() ?>" class="product-item-title"><?= $product->getName() ?></a>
+                <p>$<?= number_format($product->getPrice(), 2) ?></p>
+                <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
             </div>
-        <?php endforeach; ?>
+       <?php endforeach; ?>
     </div>
 </div>
