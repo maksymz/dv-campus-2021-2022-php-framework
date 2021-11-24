@@ -1,0 +1,92 @@
+.contact-us-form {
+    .field {
+        margin-bottom: 10px;
+
+        label {
+            width: 75px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        input, textarea {
+            width: ~'calc(100% - 95px)';
+            max-width: 200px;
+        }
+
+    }
+
+    &-description {
+        margin-bottom: 30px;
+    }
+
+    button {
+        margin-top: 10px;
+        height: max-content;
+    }
+
+}
+
+@media (min-width: @screen__xs) {
+    .contact-us-form {
+        display: grid;
+        max-width: 600px;
+        margin: 0 auto;
+        grid-template-rows: repeat(4, auto);
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1vw;
+        grid-template-areas:
+            "title title"
+            "description description"
+            "name email"
+            "question question"
+            "button button";
+
+        &-title {
+            grid-area: title;
+        }
+
+        &-description {
+            grid-area: description;
+        }
+
+        &-name {
+            grid-area: name;
+        }
+
+        &-email {
+            grid-area: email;
+        }
+
+        &-question {
+            grid-area: question;
+        }
+
+        .field {
+            textarea {
+                max-width: 100%;
+            }
+        }
+
+        button {
+            grid-area: button;
+            width: max-content;
+            justify-self: center;
+        }
+    }
+}
+
+@media (min-width: @screen__m) {
+    .contact-us-form {
+        max-width: 620px;
+
+        .field {
+            label {
+                width: 90px;
+            }
+
+            textarea {
+                width: ~'calc(100% - 100px)';
+            }
+        }
+    }
+}
