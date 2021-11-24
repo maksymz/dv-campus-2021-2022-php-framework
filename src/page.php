@@ -34,20 +34,22 @@
 </main>
 
 <footer>
-    <nav>
-        <ul>
-            <li>
+    <div class="footer-links-wrapper content-wrapper">
+        <ul class="footer-links">
+            <li class="footer-link-item">
                 <a href="/about-us">About Us</a>
             </li>
-            <li>
+            <li class="footer-link-item">
                 <a href="/terms-and-conditions">Terms & Conditions</a>
             </li>
-            <li>
+            <li class="footer-link-item">
                 <a href="/contact-us">Contact Us</a>
             </li>
         </ul>
-    </nav>
-    <p>© Default Value 2021. All Rights Reserved.</p>
+    </div>
+    <div class="copyright">
+        <p>© Default Value 2021. All Rights Reserved.</p>
+    </div>
 </footer>
 </body>
 </html>

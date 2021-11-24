@@ -1,0 +1,36 @@
+footer {
+    background-color: @footer-background-color;
+
+    .footer-links {
+        text-align: center;
+        padding: 10px;
+
+        .footer-link-item {
+            margin-bottom: 10px;
+        }
+
+        a {
+            font-family: @robotoSlab-Medium;
+            color: @base-text-color;
+
+        }
+    }
+
+    .copyright {
+        padding: 10px;
+        text-align: center;
+        border-top: 1px solid @base-text-color;
+        p {
+            margin: 0;
+        }
+    }
+}
+
+@media (min-width: @screen__xs){
+    footer {
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
