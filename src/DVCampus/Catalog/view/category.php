@@ -10,7 +10,7 @@
                     <img src="/images/product-placeholder.png" alt="<?= $product->getName() ?>" />
                 </a>
                 <a href="/<?= $product->getUrl() ?>" title="<?= $product->getName() ?>" class="product-item-title"><?= $product->getName() ?></a>
-                <p>$<?= number_format($product->getPrice(), 2) ?></p>
+                <p class="product-item-price">$<?= number_format($product->getPrice(), 2) ?></p>
                 <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
             </div>
        <?php endforeach; ?>
