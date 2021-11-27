@@ -40,8 +40,9 @@
     </div>
 </section>
 <section title="Recently Viewed Products">
-    <h2>Recently Viewed Products</h2>
-    <div class="product-list recently-viewed-slider-wrapper">
+    <div class="recently-viewed-slider-wrapper content-wrapper">
+        <h2>Recently Viewed Products</h2>
+        <div class="product-list recently-viewed-slider-wrapper">
         <div class="recently-viewed-slider">
             <div class="product">
                 <a href="/product-1-url" title="Product 1" class="product-item-image">
@@ -76,6 +77,7 @@
             <span class="slider-control-next-icon"><i class="fas fa-chevron-right"></i></span>
             <span class="slider-control-prev-title">Next</span>
         </button>
+    </div>
     </div>
 </section>
 <section class="special-products-section">

@@ -2,7 +2,7 @@
 /** @var \DVCampus\Catalog\Block\Product $block */
 $product = $block->getProduct();
 ?>
-<div class="product-page">
+<div class="product-page content-wrapper">
     <div class="product-media">
         <figure class="product-image">
             <img src="/images/product-placeholder.png" alt="<?= $product->getName() ?>"/>

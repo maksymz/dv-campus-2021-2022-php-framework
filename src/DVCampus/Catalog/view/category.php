@@ -1,7 +1,7 @@
 <?php
 /** @var \DVCampus\Catalog\Block\Category $block */
 ?>
-<div title="category-wrapper" class="category-page">
+<div title="category-wrapper" class="category-page content-wrapper">
     <h1 class="category-page-title"><?= $block->getCategory()->getName() ?></h1>
     <div class="product-list">
         <?php foreach ($block->getCategoryProducts() as $product) : ?>
