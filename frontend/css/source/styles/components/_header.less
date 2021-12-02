@@ -57,6 +57,92 @@ header {
     }
 }
 
+@media (max-width: @screen__m) {
+    body {
+        &.open-menu {
+            position: fixed;
+
+            &:after {
+                content: "''";
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background: @color-black;
+                opacity: 0.7;
+                z-index: 999;
+            }
+        }
+
+        header {
+            z-index: 1001;
+        }
+    }
+
+    .menu-btn-mobile {
+        i {
+            transition-duration: 200ms;
+        }
+
+        i:first-child {
+            transform-origin: top left;
+        }
+
+        i:last-child {
+            transform-origin: bottom left;
+        }
+
+        &.active {
+            i:first-child {
+                transform: translateY(-100%) rotate(45deg) scaleX(1.42);
+            }
+
+            i:nth-child(2) {
+                visibility: hidden;
+                transition-duration: 0s;
+            }
+
+            i:last-child {
+                transform: translateY(100%) rotate(-45deg) scaleX(1.42);
+            }
+        }
+    }
+
+    .navigation-wrapper {
+        visibility: hidden;
+        position: absolute;
+        transform: translateX(100%);
+        transition-duration: 200ms;
+        padding: 25px 150px 25px 50px;
+        font-size: 1.2rem;
+        background-color: @background-color-grape;
+        height: 100vh;
+
+        ul {
+            display: block;
+            visibility: hidden;
+        }
+
+        li {
+            margin-bottom: 25px;
+        }
+
+        &.active {
+            visibility: visible;
+            transform: translateX(-55%);
+
+            ul {
+                visibility: visible;
+            }
+
+            a {
+                color: @color-white;
+            }
+        }
+    }
+}
+
 @media (min-width: @screen__m) {
     header {
         nav {
