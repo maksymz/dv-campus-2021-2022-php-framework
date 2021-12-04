@@ -69,11 +69,21 @@ module.exports = function(grunt) {
             }
         },
 
+        copy: {
+            dev: {
+                expand: true,
+                cwd: 'frontend/js',
+                src: '**',
+                dest: 'web/js/',
+            },
+        },
+
+
         uglify: {
-            js: {
+            prod: {
                 options: {
                     sourceMap: true,
-                    sourceMapName: 'web/js/main.map'
+                    sourceMapName: 'web/js/main.map',
                 },
                 files: [{
                     expand: true,
@@ -96,7 +106,7 @@ module.exports = function(grunt) {
             },
             scripts: {
                 files: ['frontend/js/**/*.js', 'frontend/js/*.js'],
-                tasks: ['uglify']
+                tasks: ['copy']
             }
         }
     });
@@ -106,7 +116,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-image');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['less:prod', 'postcss:prod', 'image', 'uglify']);
-    grunt.registerTask('dev', ['less:dev', 'postcss:dev', 'image', 'uglify', 'watch']);
+    grunt.registerTask('default', ['less:prod', 'postcss:prod', 'image', 'uglify:prod']);
+    grunt.registerTask('dev', ['less:dev', 'postcss:dev', 'image', 'copy:dev', 'watch']);
 };
