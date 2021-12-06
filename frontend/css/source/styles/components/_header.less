@@ -114,10 +114,15 @@ header {
         position: fixed;
         transform: translateX(100%);
         transition-duration: 200ms;
-        padding: 25px 150px 25px 50px;
+        padding: 25px 40px;
         font-size: 1.2rem;
         background-color: @background-color-grape;
         height: 100vh;
+        right: 0;
+        max-width: 75%;
+        min-width: 300px;
+        word-break: break-word;
+        box-sizing: border-box;
 
         ul {
             display: block;
@@ -130,7 +135,7 @@ header {
 
         &.active {
             visibility: visible;
-            transform: translateX(-55%);
+            transform: translateX(0);
 
             ul {
                 visibility: visible;
