@@ -69,6 +69,32 @@ module.exports = function(grunt) {
             }
         },
 
+        copy: {
+            dev: {
+                expand: true,
+                cwd: 'frontend/js',
+                src: '**',
+                dest: 'web/js/',
+            },
+        },
+
+
+        uglify: {
+            prod: {
+                options: {
+                    sourceMap: true,
+                    sourceMapName: 'web/js/main.map',
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'frontend/js',
+                    src: '**/*.js',
+                    dest: 'web/js'
+                }]
+            }
+        },
+
+
         watch: {
             less: {
                 files: ['frontend/css/source/**/*.less'],
@@ -77,6 +103,10 @@ module.exports = function(grunt) {
             image: {
                 files: 'frontend/images/**/*.{png,jpg,gif}',
                 tasks: ['image']
+            },
+            scripts: {
+                files: ['frontend/js/**/*.js', 'frontend/js/*.js'],
+                tasks: ['copy']
             }
         }
     });
@@ -85,7 +115,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('@lodder/grunt-postcss');
     grunt.loadNpmTasks('grunt-image');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', ['less:prod', 'postcss:prod', 'image']);
-    grunt.registerTask('dev', ['less:dev', 'postcss:dev', 'image', 'watch']);
+    grunt.registerTask('default', ['less:prod', 'postcss:prod', 'image', 'uglify:prod']);
+    grunt.registerTask('dev', ['less:dev', 'postcss:dev', 'image', 'copy:dev', 'watch']);
 };

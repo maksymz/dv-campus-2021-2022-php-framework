@@ -1,0 +1,39 @@
+.campus-slider {
+  touch-action: pan-y;
+  user-select: none;
+
+  &:not(.campus-slider-initialized) {
+    visibility: hidden;
+  }
+
+  .slider-control {
+    &:not(.active) {
+      display: none;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+}
+
+.campus-slider-list {
+  overflow: hidden;
+}
+
+.campus-slider-track {
+  display: flex;
+
+  &.dragging {
+    cursor: grabbing;
+
+    img, a {
+      pointer-events: none;
+    }
+  }
+}
+
+.campus-slider-slide {
+  flex-shrink: 0;
+}
+

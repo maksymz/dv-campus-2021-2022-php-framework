@@ -42,8 +42,7 @@
 <section title="Recently Viewed Products">
     <div class="recently-viewed-slider-wrapper content-wrapper">
         <h2>Recently Viewed Products</h2>
-        <div class="product-list recently-viewed-slider-wrapper">
-        <div class="recently-viewed-slider">
+        <div class="product-list recently-viewed-slider-wrapper campus-slider">
             <div class="product">
                 <a href="/product-1-url" title="Product 1" class="product-item-image">
                     <img src="/images/product-placeholder.png" alt="Product 1"/>
@@ -68,16 +67,23 @@
                 <p class="product-item-price">$99.99</p>
                 <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
             </div>
+            <div class="product">
+                <a href="/product-4-url" title="Product 4" class="product-item-image">
+                    <img src="/images/product-placeholder.png" alt="Product 4"/>
+                </a>
+                <a href="/product-4-url" title="Product 4" class="product-item-title">Product 4</a>
+                <p class="product-item-price">$79.99</p>
+                <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
+            </div>
+            <div class="product">
+                <a href="/product-5-url" title="Product 4" class="product-item-image">
+                    <img src="/images/product-placeholder.png" alt="Product 5"/>
+                </a>
+                <a href="/product-5-url" title="Product 5" class="product-item-title">Product 5</a>
+                <p class="product-item-price">$19.99</p>
+                <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
+            </div>
         </div>
-        <button class="slider-control-prev slider-control button-hover" type="button">
-            <span class="slider-control-prev-icon"><i class="fas fa-chevron-left"></i></span>
-            <span class="slider-control-prev-title">Previous</span>
-        </button>
-        <button class="slider-control-next slider-control button-hover" type="button">
-            <span class="slider-control-next-icon"><i class="fas fa-chevron-right"></i></span>
-            <span class="slider-control-prev-title">Next</span>
-        </button>
-    </div>
     </div>
 </section>
 <section class="special-products-section">
