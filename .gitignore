@@ -6,4 +6,3 @@
 /var/log/*
 !/var/log/.gitkeep
 /vendor/
-/web/js/*

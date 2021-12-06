@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="/css/reset.css"/>
     <link rel="preload" as="style" href="/css/main.min.css"/>
     <link rel="stylesheet" href="/css/main.min.css"/>
-    <script type="module" src="js/main.js" defer></script>
 </head>
 <body>
 <header>
@@ -20,7 +19,7 @@
             <img src="/images/logo.jpg" alt="{DV.Campus} Logo" width="200"/>
         </a>
         <nav>
-            <div class="menu-btn-mobile" id="menu-btn-mobile">
+            <div class="menu-btn-mobile">
                 <button class="wrapper-button">
                     <i></i><i></i><i></i>
                 </button>
