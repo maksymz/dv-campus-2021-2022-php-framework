@@ -1,4 +1,6 @@
-<!-- @TODO: Implement recently viewed products -->
+<?php
+/** @var \DVCampus\Framework\View\Renderer $this */
+?>
 <section class="welcome-section">
     <div class="content-wrapper">
         <div class="content">
@@ -39,53 +41,7 @@
         </div>
     </div>
 </section>
-<section title="Recently Viewed Products">
-    <div class="recently-viewed-slider-wrapper content-wrapper">
-        <h2>Recently Viewed Products</h2>
-        <div class="product-list recently-viewed-slider-wrapper campus-slider">
-            <div class="product">
-                <a href="/product-1-url" title="Product 1" class="product-item-image">
-                    <img src="/images/product-placeholder.png" alt="Product 1"/>
-                </a>
-                <a href="/product-1-url" title="Product 1" class="product-item-title">Product 1</a>
-                <p class="product-item-price">$33.33</p>
-                <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
-            </div>
-            <div class="product">
-                <a href="/product-2-url" title="Product 2" class="product-item-image">
-                    <img src="/images/product-placeholder.png" alt="Product 2"/>
-                </a>
-                <a href="/product-2-url" title="Product 2" class="product-item-title">Product 2</a>
-                <p class="product-item-price">$66.66</p>
-                <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
-            </div>
-            <div class="product">
-                <a href="/product-3-url" title="Product 3" class="product-item-image">
-                    <img src="/images/product-placeholder.png" alt="Product 3"/>
-                </a>
-                <a href="/product-3-url" title="Product 3" class="product-item-title">Product 3</a>
-                <p class="product-item-price">$99.99</p>
-                <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
-            </div>
-            <div class="product">
-                <a href="/product-4-url" title="Product 4" class="product-item-image">
-                    <img src="/images/product-placeholder.png" alt="Product 4"/>
-                </a>
-                <a href="/product-4-url" title="Product 4" class="product-item-title">Product 4</a>
-                <p class="product-item-price">$79.99</p>
-                <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
-            </div>
-            <div class="product">
-                <a href="/product-5-url" title="Product 4" class="product-item-image">
-                    <img src="/images/product-placeholder.png" alt="Product 5"/>
-                </a>
-                <a href="/product-5-url" title="Product 5" class="product-item-title">Product 5</a>
-                <p class="product-item-price">$19.99</p>
-                <button type="button" class="add-to-cart-button button-hover">Add To Cart</button>
-            </div>
-        </div>
-    </div>
-</section>
+<?= $this->render(\DVCampus\Catalog\Block\Product\RecentlyViewed::class) ?>
 <section class="special-products-section">
     <div class="content-wrapper">
         <h2>Special products</h2>
