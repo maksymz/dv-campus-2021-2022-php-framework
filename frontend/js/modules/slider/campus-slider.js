@@ -416,9 +416,9 @@ class CampusSlider {
          * Normalize indexes if we reach beginning or the end of sliders
          */
         if (newIndex < 0) {
-            newIndex = this.slides.length - this.params.slidesPerView;
+            newIndex = this.params.loop ?  this.slides.length - this.params.slidesPerView : 0;
         } else if (newIndex > this.slides.length - this.params.slidesPerView) {
-            newIndex = 0
+            newIndex = this.params.loop ? 0 : this.slides.length - this.params.slidesPerView;
         }
 
         /**
