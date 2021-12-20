@@ -18,11 +18,11 @@ class Entity
 
     private float $price;
 
-    private float $qty;
+    private int $qty;
 
-    private $createdAt;
+    private int $createdAt;
 
-    private $updatedAt;
+    private int $updatedAt;
 
     /**
      * @return int
@@ -141,7 +141,7 @@ class Entity
     /**
      * @return int
      */
-    public function getQty(): float
+    public function getQty(): int
     {
         return $this->qty;
     }
