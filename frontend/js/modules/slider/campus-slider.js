@@ -106,6 +106,11 @@ class CampusSlider {
             }
         }
 
+        /** if we cannot locate dom element for slider init, return null */
+        if (!sliderParams.el) {
+            return;
+        }
+
         /** save initial params - necessary for breakpoints override */
         this.initParams = sliderParams;
         this.params = sliderParams;
@@ -270,7 +275,7 @@ class CampusSlider {
 
     updateSliderProps() {
         /** if breakpoints are empty, just skip it*/
-        if (!this.breakpointsKeys) {
+        if (!this.breakpointsKeys.length) {
             return;
         }
 
@@ -347,9 +352,8 @@ class CampusSlider {
 
     /** Function fired on mouseup and touchend */
     swipeEnd() {
-        const {posInit, posX1, posThreshold} = this.swipePosition;
+        const {posInit, posX1} = this.swipePosition;
         this.swipePosition.posFinal = posInit - posX1;
-        const posFinal = this.swipePosition.posFinal;
         this.track.classList.remove(initParams.trackDragging)
 
         document.removeEventListener('touchmove', this.swipeAction);
@@ -357,17 +361,7 @@ class CampusSlider {
         document.removeEventListener('touchend', this.swipeEnd);
         document.removeEventListener('mouseup', this.swipeEnd);
 
-        /** if threshold is reached, find direction and call appropriate function */
-        if (Math.abs(posFinal) > posThreshold * this.getSlideWidth()) {
-            if (posInit < posX1) {
-                this.slidePrev();
-            } else if (posInit > posX1) {
-                this.slideNext()
-            }
-        } else {
-            /** else return slide to original position */
-            this.toSlide(this.activeIndex, this.params.speed)
-        }
+        this.toSlide(this.calculateSwipeDestinationIndex(), this.params.speed);
     }
 
     /** record mouse / touch movement */
@@ -381,6 +375,56 @@ class CampusSlider {
         this.swipePosition.posX1 = event.clientX;
 
         this.track.style.transform = `translate3d(${transform - this.swipePosition.posX2}px, 0px, 0px)`;
+    }
+
+    calculateSwipeDestinationIndex() {
+        let newIndex = this.activeIndex;
+        const slideWidth = this.getSlideWidth();
+
+        /** check what direction we need to move slides */
+        const direction = this.swipePosition.posFinal > 0 ? 1 : -1;
+        const positionOffset = Math.abs(this.swipePosition.posFinal);
+
+        /** check how many int slides can be fit in swipe offset */
+        const indexOffset = Math.floor(positionOffset / slideWidth);
+
+        /** check the float part */
+        const thresholdOffset = (positionOffset % slideWidth) / slideWidth;
+
+        /**
+         *  if offset contains space for multiple slides to move like:
+         *  0.15 - cannot be moved, 0.15 does not reach the threshold
+         *  1.25 - can be moved to 1 slide, 0.25 does not reach the threshold
+         *  1.75 - can be moved to 1 slide, 0.75 reaches the threshold so additional offset will be added in next step
+         *  to left if direction is -1
+         *  to right if direction is 1
+         */
+        if (indexOffset) {
+            newIndex += indexOffset * direction;
+        }
+
+        /**
+         *  if we reach threshold we can move one slide:
+         *  to left if direction is -1
+         *  to right if direction is 1
+         */
+        if (thresholdOffset > this.swipePosition.posThreshold) {
+            newIndex += direction;
+        }
+
+        /**
+         * Normalize indexes if we reach beginning or the end of sliders
+         */
+        if (newIndex < 0) {
+            newIndex = this.params.loop ?  this.slides.length - this.params.slidesPerView : 0;
+        } else if (newIndex > this.slides.length - this.params.slidesPerView) {
+            newIndex = this.params.loop ? 0 : this.slides.length - this.params.slidesPerView;
+        }
+
+        /**
+         * if none of previous steps overrode the newIndex it equals active index
+         */
+        return newIndex;
     }
 
     /** init slider */
